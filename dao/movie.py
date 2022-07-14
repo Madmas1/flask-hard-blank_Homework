@@ -9,14 +9,21 @@ class MovieDAO:
     def __init__(self, session):
         self.session = session
 
-    def get_one(self, mid):
+    def join_query(self):
         return self.session.query(Movie.title, Movie.description, Movie.year, Movie.rating, Movie.trailer,
-                     Genre.name.label('genre'), Director.name.label('director')).join(Genre).join(Director).filter(Movie.id == mid).one()
-
-    def get_all(self):
-        movies_query = self.session.query(Movie.title, Movie.description, Movie.year, Movie.rating, Movie.trailer,
                      Genre.name.label('genre'), Director.name.label('director')).join(Genre).join(Director)
-        return movies_query
+
+    def get_one(self, mid, data=None):
+        if data:
+            return data.filter(Movie.id == mid).first()
+        else:
+            return self.session.query(Movie).filter(Movie.id == mid).one()
+
+    def get_all(self, data=None):
+        if data:
+            return data.all()
+        else:
+            return self.session.query(Movie).all()
 
     def genre_filter(self, query, value):
         return query.filter(Genre.id == value)

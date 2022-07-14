@@ -18,7 +18,7 @@ class DirectorService:
 
     def update(self, data):
         did = data.get("id")
-        director = self.get_one(did)
+        director = self.dao.get_one(did)
 
         director.name = data.get("name")
 
@@ -26,7 +26,7 @@ class DirectorService:
 
     def update_partial(self, data):
         did = data.get("id")
-        director = self.get_one(did)
+        director = self.dao.get_one(did)
 
         if "name" in data:
             director.title = data.get("name")

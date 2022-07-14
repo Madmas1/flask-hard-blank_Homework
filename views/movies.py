@@ -25,7 +25,7 @@ class MoviesView(Resource):
     def post(self):
         req_json = request.json
         movie_service.create(req_json)
-        return "The element was successfully added", 204
+        return "The element was successfully added", 201
 
 
 @movie_ns.route('/<int:mid>')

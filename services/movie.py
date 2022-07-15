@@ -13,14 +13,13 @@ class MovieService:
 
     def get_all(self, did=None, gid=None, year=None):
         movies_data = self.dao.join_query()
-        movies_data = self.dao.get_all(movies_data)
         if did:
             movies_data = self.dao.director_filter(movies_data, did)
         if gid:
             movies_data = self.dao.genre_filter(movies_data, gid)
         if year:
             movies_data = self.dao.year_filter(movies_data, year)
-        return movies_data
+        return self.dao.get_all(movies_data)
 
     def create(self, data):
         return self.dao.create(data)

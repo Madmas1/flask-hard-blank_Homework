@@ -25,14 +25,14 @@ class MovieDAO:
         else:
             return self.session.query(Movie).all()
 
-    def genre_filter(self, query, value):
-        return query.filter(Genre.id == value)
+    def genre_filter(self, data, value):
+        return data.filter(Genre.id == value)
 
-    def director_filter(self, query, value):
-        return query.filter(Director.id == value)
+    def director_filter(self, data, value):
+        return data.filter(Director.id == value)
 
-    def year_filter(self, query, value):
-        return query.filter(Movie.year == value)
+    def year_filter(self, data, value):
+        return data.filter(Movie.year == value)
 
     def create(self, data):
         new_movie = Movie(**data)
